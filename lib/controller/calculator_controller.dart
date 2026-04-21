@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
-final box = GetStorage();
-class CalculatorController extends GetxController{
+class CalculatorController extends GetxController {
+  final box = GetStorage();
   var decimalPlaces = 2.obs;
-  var input="0".obs;
+  var input = "0".obs;
   var isDarkMode = false.obs;
 
-  var firstNumber=0.0;
-  var operator="";
+  var firstNumber = 0.0;
+  var operator = "";
   var history = <String>[].obs;
 
   @override
@@ -52,7 +52,9 @@ class CalculatorController extends GetxController{
         break;
       case "/":
         if (secondNumber == 0) {
-          Get.snackbar("Error", "Cannot divide by zero",
+          Get.snackbar(
+            "Error",
+            "Cannot divide by zero",
             snackPosition: SnackPosition.BOTTOM,
           );
           return;
@@ -61,7 +63,8 @@ class CalculatorController extends GetxController{
         break;
     }
 
-    String record = "$firstNumber $operator $secondNumber = ${result.toStringAsFixed(decimalPlaces.value)}";
+    String record =
+        "$firstNumber $operator $secondNumber = ${result.toStringAsFixed(decimalPlaces.value)}";
     input.value = result.toStringAsFixed(decimalPlaces.value);
     operator = "";
 
@@ -76,23 +79,21 @@ class CalculatorController extends GetxController{
   }
 
   void setDecimal(int value) {
-
     decimalPlaces.value = value;
     box.write("decimal", value); // save
-
   }
 
   void toggleTheme() {
     isDarkMode.value = !isDarkMode.value;
     box.write("isDarkMode", isDarkMode.value);
-    Get.changeThemeMode(
-      isDarkMode.value ? ThemeMode.dark : ThemeMode.light,
-    );
+    Get.changeThemeMode(isDarkMode.value ? ThemeMode.dark : ThemeMode.light);
   }
 
   void appendValues(String value) {
     if (value == "." && input.value.contains(".")) {
-      Get.snackbar("Invalid Input", "Decimal already exists",
+      Get.snackbar(
+        "Invalid Input",
+        "Decimal already exists",
         snackPosition: SnackPosition.BOTTOM,
       );
       return;
@@ -104,5 +105,4 @@ class CalculatorController extends GetxController{
       input.value += value;
     }
   }
-
 }

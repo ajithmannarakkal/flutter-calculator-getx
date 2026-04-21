@@ -1,39 +1,53 @@
-# Calculator App (GetX)
+# Calculator App - GetX
 
-A calculator app built with Flutter and GetX for state management. Supports basic arithmetic, decimal precision control, calculation history, and dark/light theme.
+Simple calculator app made with Flutter and GetX. Has basic math operations, decimal precision control, history, and theme switching.
 
-## Features
+## Screenshots
 
-- Addition, Subtraction, Multiplication, Division
-- Chained operations (e.g. 12.5 + 5 × 2)
-- Decimal precision setting (2, 4, or 6 decimal places)
-- Calculation history (stored locally)
-- Dark / Light theme toggle (persisted across sessions)
-- Responsive layout for portrait and landscape
+| Light Mode | Dark Mode |
+|:---:|:---:|
+| ![Light Mode](light_mode.png) | ![Dark Mode](dark_mode.png) |
 
-## How to Change Decimal Precision
+| History | Landscape |
+|:---:|:---:|
+| ![History](history.png) | ![Landscape](landscape.png) |
 
-The bottom row of the calculator has three buttons: **2dp**, **4dp**, and **6dp**. Tap any of them to change how many decimal places the result shows. For example, tapping **4dp** will display results with 4 decimal places. This setting is saved automatically using GetStorage, so it stays the same even after restarting the app.
+## What it does
 
-## Project Structure
+- Basic operations: +, -, ×, ÷
+- Chain multiple operations (like 12.5 + 5 × 2)
+- Choose decimal places (2, 4, or 6)
+- History log in bottom sheet
+- Dark/Light mode
+- Works in portrait and landscape
+
+## Changing Decimal Precision
+
+There are 3 buttons at the bottom of the calculator - **2dp**, **4dp**, **6dp**. Just tap whichever one you want. It gets saved with GetStorage so it remembers your choice next time.
+
+## Folder Structure
 
 ```
 lib/
-├── main.dart                          # App entry point, theme setup
+├── main.dart
+├── binding/
+│   └── calculator_binding.dart
 ├── controller/
-│   └── calculator_controller.dart     # All business logic (GetxController)
+│   └── calculator_controller.dart
 └── view/
-    └── calculator_screen.dart         # UI layer
+    └── calculator_screen.dart
 ```
 
-## Packages Used
+Binding registers the controller with `Get.lazyPut`, controller has all the logic, view just displays stuff using `Get.find()`.
 
-- [get](https://pub.dev/packages/get) – State management, navigation, snackbars
-- [get_storage](https://pub.dev/packages/get_storage) – Local persistence
+## Packages
 
-## Run the App
+- get
+- get_storage
 
-```bash
+## How to Run
+
+```
 flutter pub get
 flutter run
 ```
