@@ -14,7 +14,9 @@ class CalculatorController extends GetxController{
   void onInit() {
     super.onInit();
     decimalPlaces.value = box.read("decimal") ?? 2;
-    history.value = List<String>.from(box.read("history") ?? []);
+
+    List savedHistory = box.read("history") ?? [];
+    history.value = List<String>.from(savedHistory);
   }
 
   void setOperator(String op) {
@@ -53,8 +55,7 @@ class CalculatorController extends GetxController{
 
     String record = "$firstNumber $operator $secondNumber = ${input.value}";
     history.add(record);
-    box.write("history", history);
-  }
+    box.write("history", history.toList());  }
 
   void setDecimal(int value) {
 

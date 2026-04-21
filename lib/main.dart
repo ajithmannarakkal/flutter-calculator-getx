@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_calculator_getx/view/calculator_screen.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
-void main() {
+Future<void> main() async {
+  await GetStorage.init();
   runApp(const MyApp());
 }
 
