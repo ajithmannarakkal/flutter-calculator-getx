@@ -25,7 +25,9 @@ class CalculatorController extends GetxController{
   void setOperator(String op) {
     if (input.value.isEmpty) return;
 
-    if (operator.isNotEmpty) return; // prevent multiple operators
+    if (operator.isNotEmpty) {
+      calculate();
+    }
 
     firstNumber = double.parse(input.value);
     operator = op;
@@ -65,6 +67,12 @@ class CalculatorController extends GetxController{
 
     history.add(record);
     box.write("history", history.toList());
+  }
+
+  void clear() {
+    input.value = "0";
+    operator = "";
+    firstNumber = 0.0;
   }
 
   void setDecimal(int value) {

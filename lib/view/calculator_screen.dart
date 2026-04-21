@@ -69,7 +69,6 @@ class CalculatorScreen extends StatelessWidget {
 
               child: GridView.count(
                 crossAxisCount: 4,
-                // shrinkWrap: true,
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(6.0),
@@ -94,7 +93,7 @@ class CalculatorScreen extends StatelessWidget {
                   ),
                   Padding(
                     padding: const EdgeInsets.all(6.0),
-                    child: ElevatedButton(onPressed: () =>controller.setOperator("*"), child: Text('X')),
+                    child: ElevatedButton(onPressed: () => controller.setOperator("/"), child: Text('÷')),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(6.0),
@@ -119,7 +118,7 @@ class CalculatorScreen extends StatelessWidget {
                   ),
                   Padding(
                     padding: const EdgeInsets.all(6.0),
-                    child: ElevatedButton(onPressed: ()=>controller.setOperator("-"), child: Text('-')),
+                    child: ElevatedButton(onPressed: () => controller.setOperator("*"), child: Text('×')),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(6.0),
@@ -144,7 +143,32 @@ class CalculatorScreen extends StatelessWidget {
                   ),
                   Padding(
                     padding: const EdgeInsets.all(6.0),
-                    child: ElevatedButton(onPressed: () =>controller.setOperator("+"), child: Text('+')),
+                    child: ElevatedButton(onPressed: () => controller.setOperator("-"), child: Text('-')),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(6.0),
+                    child: ElevatedButton(
+                      onPressed: () => controller.appendValues("0"),
+                      child: Text('0'),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(6.0),
+                    child: ElevatedButton(
+                      onPressed: () => controller.appendValues("."),
+                      child: Text('.'),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(6.0),
+                    child: ElevatedButton(
+                      onPressed: () => controller.clear(),
+                      child: Text('C'),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(6.0),
+                    child: ElevatedButton(onPressed: () => controller.setOperator("+"), child: Text('+')),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(6.0),
@@ -153,7 +177,6 @@ class CalculatorScreen extends StatelessWidget {
                       child: Text("2dp"),
                     ),
                   ),
-
                   Padding(
                     padding: const EdgeInsets.all(6.0),
                     child: ElevatedButton(
@@ -161,7 +184,6 @@ class CalculatorScreen extends StatelessWidget {
                       child: Text("4dp"),
                     ),
                   ),
-
                   Padding(
                     padding: const EdgeInsets.all(6.0),
                     child: ElevatedButton(
@@ -171,9 +193,8 @@ class CalculatorScreen extends StatelessWidget {
                   ),
                   Padding(
                     padding: const EdgeInsets.all(6.0),
-                    child: ElevatedButton(onPressed: () =>controller.calculate(), child: Text('=')),
+                    child: ElevatedButton(onPressed: () => controller.calculate(), child: Text('=')),
                   ),
-
                 ],
               ),
             ),
