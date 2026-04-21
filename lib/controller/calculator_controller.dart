@@ -6,6 +6,7 @@ class CalculatorController extends GetxController {
   final box = GetStorage();
   var decimalPlaces = 2.obs;
   var input = "0".obs;
+  var expression = "".obs;
   var isDarkMode = false.obs;
 
   var firstNumber = 0.0;
@@ -31,6 +32,7 @@ class CalculatorController extends GetxController {
 
     firstNumber = double.parse(input.value);
     operator = op;
+    expression.value = "$firstNumber $op";
     input.value = "";
   }
 
@@ -66,6 +68,7 @@ class CalculatorController extends GetxController {
     String record =
         "$firstNumber $operator $secondNumber = ${result.toStringAsFixed(decimalPlaces.value)}";
     input.value = result.toStringAsFixed(decimalPlaces.value);
+    expression.value = "";
     operator = "";
 
     history.add(record);
@@ -74,6 +77,7 @@ class CalculatorController extends GetxController {
 
   void clear() {
     input.value = "0";
+    expression.value = "";
     operator = "";
     firstNumber = 0.0;
   }

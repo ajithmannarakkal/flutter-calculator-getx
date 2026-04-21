@@ -85,14 +85,26 @@ class CalculatorScreen extends StatelessWidget {
                   alignment: Alignment.bottomRight,
                   child: Padding(
                     padding: EdgeInsets.all(isLandscape ? 8 : 20),
-                    child: Obx(
-                      () => Text(
-                        controller.input.value,
-                        style: TextStyle(
-                          fontSize: displayFontSize,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Obx(() => Text(
+                          controller.expression.value,
+                          style: TextStyle(
+                            fontSize: displayFontSize * 0.5,
+                            color: Colors.grey,
+                          ),
+                        )),
+                        SizedBox(height: 4),
+                        Obx(() => Text(
+                          controller.input.value,
+                          style: TextStyle(
+                            fontSize: displayFontSize,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        )),
+                      ],
                     ),
                   ),
                 ),
