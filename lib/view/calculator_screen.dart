@@ -11,7 +11,27 @@ class CalculatorScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Calculator')),
+      appBar: AppBar(title: Text('Calculator'),actions: [IconButton(
+        onPressed: () {
+          Get.bottomSheet(
+            Container(
+              padding: EdgeInsets.all(16),
+              color: Colors.white,
+              child: Obx(() {
+                return ListView.builder(
+                  itemCount: controller.history.length,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      title: Text(controller.history[index]),
+                    );
+                  },
+                );
+              }),
+            ),
+          );
+        },
+        icon: Icon(Icons.history),
+      )],),
       body: Column(
         children: [
           Expanded(
