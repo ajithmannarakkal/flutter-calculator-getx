@@ -7,39 +7,52 @@ class CalculatorController extends GetxController{
   var firstNumber=0.0;
   var operator="";
 
-  void setOperator(String op){
-    firstNumber=double.parse(input.value);
-    operator=op;
-    input.value="";
+  void setOperator(String op) {
+    if (input.value.isEmpty) return;
+
+    if (operator.isNotEmpty) return; // prevent multiple operators
+
+    firstNumber = double.parse(input.value);
+    operator = op;
+    input.value = "";
   }
 
-  void calculate(){
-    double secondNumber=double.parse(input.value);
-    double result=0;
-    switch(operator){
+  void calculate() {
+    if (input.value.isEmpty || operator.isEmpty) return;
+
+    double secondNumber = double.parse(input.value);
+    double result = 0;
+
+    switch (operator) {
       case "+":
-        result=firstNumber+secondNumber;
+        result = firstNumber + secondNumber;
         break;
       case "-":
-        result=firstNumber-secondNumber;
+        result = firstNumber - secondNumber;
         break;
       case "*":
-        result=firstNumber*secondNumber;
+        result = firstNumber * secondNumber;
         break;
       case "/":
-        result=firstNumber/secondNumber;
+        if (secondNumber == 0) return; // prevent crash
+        result = firstNumber / secondNumber;
         break;
     }
-    input.value=result.toString();
+
+    input.value = result.toString();
+    operator = "";
   }
 
 
-  void appendValues(String value){
-    if(input.value =="0"){
-      input.value=value;
+  void appendValues(String value) {
+    if (value == "." && input.value.contains(".")) {
+      return;
     }
-    else{
-      input.value+=value;
+
+    if (input.value == "0") {
+      input.value = value;
+    } else {
+      input.value += value;
     }
   }
 
