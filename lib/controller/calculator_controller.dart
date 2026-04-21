@@ -23,7 +23,7 @@ class CalculatorController extends GetxController{
   }
 
   void setOperator(String op) {
-    if (input.value.isEmpty) return;
+    if (input.value.isEmpty || input.value == ".") return;
 
     if (operator.isNotEmpty) {
       calculate();
@@ -35,7 +35,7 @@ class CalculatorController extends GetxController{
   }
 
   void calculate() {
-    if (input.value.isEmpty || operator.isEmpty) return;
+    if (input.value.isEmpty || input.value == "." || operator.isEmpty) return;
 
     double secondNumber = double.parse(input.value);
     double result = 0;

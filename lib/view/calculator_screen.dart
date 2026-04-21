@@ -50,7 +50,7 @@ class CalculatorScreen extends StatelessWidget {
           int displayFlex = isLandscape ? 2 : 3;
           int gridFlex = isLandscape ? 6 : 5;
 
-          double displayFontSize = constraints.maxHeight * (isLandscape ? 0.08 : 0.08);
+          double displayFontSize = constraints.maxHeight * 0.08;
           double buttonFontSize = constraints.maxWidth * (isLandscape ? 0.03 : 0.045);
 
           double gridHeight = (constraints.maxHeight * gridFlex / (displayFlex + gridFlex)) - 12;
