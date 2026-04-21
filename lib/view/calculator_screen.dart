@@ -10,29 +10,40 @@ class CalculatorScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(backgroundColor: Colors.grey[100],
+    return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.grey[100],        title: Text('Calculator'),actions: [IconButton(
-        onPressed: () {
-          Get.bottomSheet(
-            Container(
-              padding: EdgeInsets.all(16),
-              color: Colors.white,
-              child: Obx(() {
-                return ListView.builder(
-                  itemCount: controller.history.length,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      title: Text(controller.history[index]),
+        title: Text('Calculator'),
+        actions: [
+          Obx(() => IconButton(
+            onPressed: () => controller.toggleTheme(),
+            icon: Icon(controller.isDarkMode.value ? Icons.light_mode : Icons.dark_mode),
+          )),
+          IconButton(
+            onPressed: () {
+              Get.bottomSheet(
+                Container(
+                  padding: EdgeInsets.all(16),
+                  color: Get.isDarkMode ? Colors.grey[900] : Colors.white,
+                  child: Obx(() {
+                    if (controller.history.isEmpty) {
+                      return Center(child: Text("No history yet"));
+                    }
+                    return ListView.builder(
+                      itemCount: controller.history.length,
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                          title: Text(controller.history[index]),
+                        );
+                      },
                     );
-                  },
-                );
-              }),
-            ),
-          );
-        },
-        icon: Icon(Icons.history),
-      )],),
+                  }),
+                ),
+              );
+            },
+            icon: Icon(Icons.history),
+          ),
+        ],
+      ),
       body: Column(
         children: [
           Expanded(  flex: 3,

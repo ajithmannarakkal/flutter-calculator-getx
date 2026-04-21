@@ -11,14 +11,17 @@ Future<void> main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    final box = GetStorage();
+    bool savedDark = box.read("isDarkMode") ?? false;
+
     return GetMaterialApp(
       title: 'Calculator App',
-      theme: ThemeData(
-        colorScheme: .fromSeed(seedColor: Colors.deepPurple),
-      ),
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData.light(),
+      darkTheme: ThemeData.dark(),
+      themeMode: savedDark ? ThemeMode.dark : ThemeMode.light,
       home: CalculatorScreen(),
     );
   }

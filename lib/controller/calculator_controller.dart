@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
@@ -5,6 +6,7 @@ final box = GetStorage();
 class CalculatorController extends GetxController{
   var decimalPlaces = 2.obs;
   var input="0".obs;
+  var isDarkMode = false.obs;
 
   var firstNumber=0.0;
   var operator="";
@@ -14,6 +16,7 @@ class CalculatorController extends GetxController{
   void onInit() {
     super.onInit();
     decimalPlaces.value = box.read("decimal") ?? 2;
+    isDarkMode.value = box.read("isDarkMode") ?? false;
 
     List savedHistory = box.read("history") ?? [];
     history.value = List<String>.from(savedHistory);
@@ -46,16 +49,23 @@ class CalculatorController extends GetxController{
         result = firstNumber * secondNumber;
         break;
       case "/":
-        if (secondNumber == 0) return; // prevent crash
+        if (secondNumber == 0) {
+          Get.snackbar("Error", "Cannot divide by zero",
+            snackPosition: SnackPosition.BOTTOM,
+          );
+          return;
+        }
         result = firstNumber / secondNumber;
         break;
     }
+
+    String record = "$firstNumber $operator $secondNumber = ${result.toStringAsFixed(decimalPlaces.value)}";
     input.value = result.toStringAsFixed(decimalPlaces.value);
     operator = "";
 
-    String record = "$firstNumber $operator $secondNumber = ${input.value}";
     history.add(record);
-    box.write("history", history.toList());  }
+    box.write("history", history.toList());
+  }
 
   void setDecimal(int value) {
 
@@ -63,12 +73,24 @@ class CalculatorController extends GetxController{
     box.write("decimal", value); // save
 
   }
+
+  void toggleTheme() {
+    isDarkMode.value = !isDarkMode.value;
+    box.write("isDarkMode", isDarkMode.value);
+    Get.changeThemeMode(
+      isDarkMode.value ? ThemeMode.dark : ThemeMode.light,
+    );
+  }
+
   void appendValues(String value) {
     if (value == "." && input.value.contains(".")) {
+      Get.snackbar("Invalid Input", "Decimal already exists",
+        snackPosition: SnackPosition.BOTTOM,
+      );
       return;
     }
 
-    if (input.value == "0") {
+    if (input.value == "0" && value != ".") {
       input.value = value;
     } else {
       input.value += value;
