@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
 class CalculatorController extends GetxController{
-
+  var decimalPlaces = 2.obs;
   var input="0".obs;
 
   var firstNumber=0.0;
@@ -38,12 +38,13 @@ class CalculatorController extends GetxController{
         result = firstNumber / secondNumber;
         break;
     }
-
-    input.value = result.toString();
+    input.value = result.toStringAsFixed(decimalPlaces.value);
     operator = "";
   }
 
-
+  void setDecimal(int value) {
+    decimalPlaces.value = value;
+  }
   void appendValues(String value) {
     if (value == "." && input.value.contains(".")) {
       return;

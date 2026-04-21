@@ -64,6 +64,20 @@ class CalculatorScreen extends StatelessWidget {
                 child: Text('3'),
               ),
               TextButton(onPressed: () =>controller.setOperator("+"), child: Text('+')),
+              TextButton(
+                onPressed: () => controller.setDecimal(2),
+                child: Text("2dp"),
+              ),
+
+              TextButton(
+                onPressed: () => controller.setDecimal(4),
+                child: Text("4dp"),
+              ),
+
+              TextButton(
+                onPressed: () => controller.setDecimal(6),
+                child: Text("6dp"),
+              ),
               TextButton(onPressed: () =>controller.calculate(), child: Text('=')),
 
             ],
