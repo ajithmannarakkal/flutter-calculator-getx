@@ -10,8 +10,9 @@ class CalculatorScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('Calculator'),actions: [IconButton(
+    return Scaffold(backgroundColor: Colors.grey[100],
+      appBar: AppBar(
+        backgroundColor: Colors.grey[100],        title: Text('Calculator'),actions: [IconButton(
         onPressed: () {
           Get.bottomSheet(
             Container(
@@ -34,73 +35,137 @@ class CalculatorScreen extends StatelessWidget {
       )],),
       body: Column(
         children: [
-          Expanded(
-            child: Container(
+          Expanded(  flex: 3,
+
+            child: Align(
               alignment: Alignment.bottomRight,
-              padding: EdgeInsets.all(20),
-              child: Obx(() => Text(controller.input.value)),
+              child: Padding(
+                padding: EdgeInsets.all(20),
+                child: Obx(() => Text(
+                  controller.input.value,
+                  style: TextStyle(
+                    fontSize: 48,
+                    fontWeight: FontWeight.bold,
+                  ),
+                )),
+              ),
             ),
           ),
-          GridView.count(
-            crossAxisCount: 4,
-            shrinkWrap: true,
-            children: [
-              TextButton(
-                onPressed: () => controller.appendValues("7"),
-                child: Text('7'),
-              ),
-              TextButton(
-                onPressed: () => controller.appendValues("8"),
-                child: Text('8'),
-              ),
-              TextButton(
-                onPressed: () => controller.appendValues("9"),
-                child: Text('9'),
-              ),
-              TextButton(onPressed: () =>controller.setOperator("*"), child: Text('X')),
-              TextButton(
-                onPressed: () => controller.appendValues("4"),
-                child: Text('4'),
-              ),
-              TextButton(
-                onPressed: () => controller.appendValues("5"),
-                child: Text('5'),
-              ),
-              TextButton(
-                onPressed: () => controller.appendValues("6"),
-                child: Text('6'),
-              ),
-              TextButton(onPressed: ()=>controller.setOperator("-"), child: Text('-')),
-              TextButton(
-                onPressed: () => controller.appendValues("1"),
-                child: Text('1'),
-              ),
-              TextButton(
-                onPressed: () => controller.appendValues("2"),
-                child: Text('2'),
-              ),
-              TextButton(
-                onPressed: () => controller.appendValues("3"),
-                child: Text('3'),
-              ),
-              TextButton(onPressed: () =>controller.setOperator("+"), child: Text('+')),
-              TextButton(
-                onPressed: () => controller.setDecimal(2),
-                child: Text("2dp"),
-              ),
+          Expanded(
+            flex: 5,
+            child: Padding(
+              padding: EdgeInsets.only(bottom: 12),
 
-              TextButton(
-                onPressed: () => controller.setDecimal(4),
-                child: Text("4dp"),
-              ),
+              child: GridView.count(
+                crossAxisCount: 4,
+                // shrinkWrap: true,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(6.0),
+                    child: ElevatedButton(
+                      onPressed: () => controller.appendValues("7"),
+                      child: Text('7'),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(6.0),
+                    child: ElevatedButton(
+                      onPressed: () => controller.appendValues("8"),
+                      child: Text('8'),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(6.0),
+                    child: ElevatedButton(
+                      onPressed: () => controller.appendValues("9"),
+                      child: Text('9'),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(6.0),
+                    child: ElevatedButton(onPressed: () =>controller.setOperator("*"), child: Text('X')),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(6.0),
+                    child: ElevatedButton(
+                      onPressed: () => controller.appendValues("4"),
+                      child: Text('4'),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(6.0),
+                    child: ElevatedButton(
+                      onPressed: () => controller.appendValues("5"),
+                      child: Text('5'),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(6.0),
+                    child: ElevatedButton(
+                      onPressed: () => controller.appendValues("6"),
+                      child: Text('6'),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(6.0),
+                    child: ElevatedButton(onPressed: ()=>controller.setOperator("-"), child: Text('-')),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(6.0),
+                    child: ElevatedButton(
+                      onPressed: () => controller.appendValues("1"),
+                      child: Text('1'),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(6.0),
+                    child: ElevatedButton(
+                      onPressed: () => controller.appendValues("2"),
+                      child: Text('2'),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(6.0),
+                    child: ElevatedButton(
+                      onPressed: () => controller.appendValues("3"),
+                      child: Text('3'),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(6.0),
+                    child: ElevatedButton(onPressed: () =>controller.setOperator("+"), child: Text('+')),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(6.0),
+                    child: ElevatedButton(
+                      onPressed: () => controller.setDecimal(2),
+                      child: Text("2dp"),
+                    ),
+                  ),
 
-              TextButton(
-                onPressed: () => controller.setDecimal(6),
-                child: Text("6dp"),
-              ),
-              TextButton(onPressed: () =>controller.calculate(), child: Text('=')),
+                  Padding(
+                    padding: const EdgeInsets.all(6.0),
+                    child: ElevatedButton(
+                      onPressed: () => controller.setDecimal(4),
+                      child: Text("4dp"),
+                    ),
+                  ),
 
-            ],
+                  Padding(
+                    padding: const EdgeInsets.all(6.0),
+                    child: ElevatedButton(
+                      onPressed: () => controller.setDecimal(6),
+                      child: Text("6dp"),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(6.0),
+                    child: ElevatedButton(onPressed: () =>controller.calculate(), child: Text('=')),
+                  ),
+
+                ],
+              ),
+            ),
           ),
         ],
       ),
