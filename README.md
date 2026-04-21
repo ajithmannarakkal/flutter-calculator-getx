@@ -12,6 +12,8 @@ Simple calculator app made with Flutter and GetX. Has basic math operations, dec
 |:---:|:---:|
 | ![History](history.png) | ![Landscape](landscape.png) |
 
+*(Note: The actual screenshot files are also attached in the root folder of this project.)*
+
 ## What it does
 
 - Basic operations: +, -, ×, ÷

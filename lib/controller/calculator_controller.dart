@@ -93,7 +93,7 @@ class CalculatorController extends GetxController {
     Get.changeThemeMode(isDarkMode.value ? ThemeMode.dark : ThemeMode.light);
   }
 
-  void appendValues(String value) {
+  void appendValue(String value) {
     if (value == "." && input.value.contains(".")) {
       Get.snackbar(
         "Invalid Input",

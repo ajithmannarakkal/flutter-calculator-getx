@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../controller/calculator_controller.dart';
+import '../widgets/calculator_button.dart';
 
 class CalculatorScreen extends StatelessWidget {
   CalculatorController get controller => Get.find<CalculatorController>();
 
-  CalculatorScreen({super.key});
+  const CalculatorScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Calculator'),
         actions: [
           Obx(
             () => IconButton(
@@ -89,21 +89,25 @@ class CalculatorScreen extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        Obx(() => Text(
-                          controller.expression.value,
-                          style: TextStyle(
-                            fontSize: displayFontSize * 0.5,
-                            color: Colors.grey,
+                        Obx(
+                          () => Text(
+                            controller.expression.value,
+                            style: TextStyle(
+                              fontSize: displayFontSize * 0.5,
+                              color: Colors.grey,
+                            ),
                           ),
-                        )),
+                        ),
                         SizedBox(height: 4),
-                        Obx(() => Text(
-                          controller.input.value,
-                          style: TextStyle(
-                            fontSize: displayFontSize,
-                            fontWeight: FontWeight.bold,
+                        Obx(
+                          () => Text(
+                            controller.input.value,
+                            style: TextStyle(
+                              fontSize: displayFontSize,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                        )),
+                        ),
                       ],
                     ),
                   ),
@@ -118,205 +122,105 @@ class CalculatorScreen extends StatelessWidget {
                     physics: NeverScrollableScrollPhysics(),
                     childAspectRatio: aspectRatio,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.all(6.0),
-                        child: ElevatedButton(
-                          onPressed: () => controller.appendValues("7"),
-                          child: Text(
-                            '7',
-                            style: TextStyle(fontSize: buttonFontSize),
-                          ),
-                        ),
+                      CalculatorButton(
+                        label: "7",
+                        fontSize: buttonFontSize,
+                        onPressed: () => controller.appendValue("7"),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(6.0),
-                        child: ElevatedButton(
-                          onPressed: () => controller.appendValues("8"),
-                          child: Text(
-                            '8',
-                            style: TextStyle(fontSize: buttonFontSize),
-                          ),
-                        ),
+                      CalculatorButton(
+                        label: "8",
+                        fontSize: buttonFontSize,
+                        onPressed: () => controller.appendValue("8"),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(6.0),
-                        child: ElevatedButton(
-                          onPressed: () => controller.appendValues("9"),
-                          child: Text(
-                            '9',
-                            style: TextStyle(fontSize: buttonFontSize),
-                          ),
-                        ),
+                      CalculatorButton(
+                        label: "9",
+                        fontSize: buttonFontSize,
+                        onPressed: () => controller.appendValue("9"),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(6.0),
-                        child: ElevatedButton(
-                          onPressed: () => controller.setOperator("/"),
-                          child: Text(
-                            '÷',
-                            style: TextStyle(fontSize: buttonFontSize),
-                          ),
-                        ),
+                      CalculatorButton(
+                        label: "÷",
+                        fontSize: buttonFontSize,
+                        onPressed: () => controller.setOperator("/"),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(6.0),
-                        child: ElevatedButton(
-                          onPressed: () => controller.appendValues("4"),
-                          child: Text(
-                            '4',
-                            style: TextStyle(fontSize: buttonFontSize),
-                          ),
-                        ),
+                      CalculatorButton(
+                        label: "4",
+                        fontSize: buttonFontSize,
+                        onPressed: () => controller.appendValue("4"),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(6.0),
-                        child: ElevatedButton(
-                          onPressed: () => controller.appendValues("5"),
-                          child: Text(
-                            '5',
-                            style: TextStyle(fontSize: buttonFontSize),
-                          ),
-                        ),
+                      CalculatorButton(
+                        label: "5",
+                        fontSize: buttonFontSize,
+                        onPressed: () => controller.appendValue("5"),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(6.0),
-                        child: ElevatedButton(
-                          onPressed: () => controller.appendValues("6"),
-                          child: Text(
-                            '6',
-                            style: TextStyle(fontSize: buttonFontSize),
-                          ),
-                        ),
+                      CalculatorButton(
+                        label: "6",
+                        fontSize: buttonFontSize,
+                        onPressed: () => controller.appendValue("6"),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(6.0),
-                        child: ElevatedButton(
-                          onPressed: () => controller.setOperator("*"),
-                          child: Text(
-                            '×',
-                            style: TextStyle(fontSize: buttonFontSize),
-                          ),
-                        ),
+                      CalculatorButton(
+                        label: "×",
+                        fontSize: buttonFontSize,
+                        onPressed: () => controller.setOperator("*"),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(6.0),
-                        child: ElevatedButton(
-                          onPressed: () => controller.appendValues("1"),
-                          child: Text(
-                            '1',
-                            style: TextStyle(fontSize: buttonFontSize),
-                          ),
-                        ),
+                      CalculatorButton(
+                        label: "1",
+                        fontSize: buttonFontSize,
+                        onPressed: () => controller.appendValue("1"),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(6.0),
-                        child: ElevatedButton(
-                          onPressed: () => controller.appendValues("2"),
-                          child: Text(
-                            '2',
-                            style: TextStyle(fontSize: buttonFontSize),
-                          ),
-                        ),
+                      CalculatorButton(
+                        label: "2",
+                        fontSize: buttonFontSize,
+                        onPressed: () => controller.appendValue("2"),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(6.0),
-                        child: ElevatedButton(
-                          onPressed: () => controller.appendValues("3"),
-                          child: Text(
-                            '3',
-                            style: TextStyle(fontSize: buttonFontSize),
-                          ),
-                        ),
+                      CalculatorButton(
+                        label: "3",
+                        fontSize: buttonFontSize,
+                        onPressed: () => controller.appendValue("3"),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(6.0),
-                        child: ElevatedButton(
-                          onPressed: () => controller.setOperator("-"),
-                          child: Text(
-                            '-',
-                            style: TextStyle(fontSize: buttonFontSize),
-                          ),
-                        ),
+                      CalculatorButton(
+                        label: "-",
+                        fontSize: buttonFontSize,
+                        onPressed: () => controller.setOperator("-"),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(6.0),
-                        child: ElevatedButton(
-                          onPressed: () => controller.appendValues("0"),
-                          child: Text(
-                            '0',
-                            style: TextStyle(fontSize: buttonFontSize),
-                          ),
-                        ),
+                      CalculatorButton(
+                        label: "0",
+                        fontSize: buttonFontSize,
+                        onPressed: () => controller.appendValue("0"),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(6.0),
-                        child: ElevatedButton(
-                          onPressed: () => controller.appendValues("."),
-                          child: Text(
-                            '.',
-                            style: TextStyle(fontSize: buttonFontSize),
-                          ),
-                        ),
+                      CalculatorButton(
+                        label: ".",
+                        fontSize: buttonFontSize,
+                        onPressed: () => controller.appendValue("."),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(6.0),
-                        child: ElevatedButton(
-                          onPressed: () => controller.clear(),
-                          child: Text(
-                            'C',
-                            style: TextStyle(fontSize: buttonFontSize),
-                          ),
-                        ),
+                      CalculatorButton(
+                        label: "C",
+                        fontSize: buttonFontSize,
+                        onPressed: () => controller.clear(),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(6.0),
-                        child: ElevatedButton(
-                          onPressed: () => controller.setOperator("+"),
-                          child: Text(
-                            '+',
-                            style: TextStyle(fontSize: buttonFontSize),
-                          ),
-                        ),
+                      CalculatorButton(
+                        label: "+",
+                        fontSize: buttonFontSize,
+                        onPressed: () => controller.setOperator("+"),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(6.0),
-                        child: ElevatedButton(
-                          onPressed: () => controller.setDecimal(2),
-                          child: Text(
-                            "2dp",
-                            style: TextStyle(fontSize: buttonFontSize),
-                          ),
-                        ),
+                      CalculatorButton(
+                        label: "2dp",
+                        fontSize: buttonFontSize,
+                        onPressed: () => controller.setDecimal(2),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(6.0),
-                        child: ElevatedButton(
-                          onPressed: () => controller.setDecimal(4),
-                          child: Text(
-                            "4dp",
-                            style: TextStyle(fontSize: buttonFontSize),
-                          ),
-                        ),
+                      CalculatorButton(
+                        label: "4dp",
+                        fontSize: buttonFontSize,
+                        onPressed: () => controller.setDecimal(4),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(6.0),
-                        child: ElevatedButton(
-                          onPressed: () => controller.setDecimal(6),
-                          child: Text(
-                            "6dp",
-                            style: TextStyle(fontSize: buttonFontSize),
-                          ),
-                        ),
+                      CalculatorButton(
+                        label: "6dp",
+                        fontSize: buttonFontSize,
+                        onPressed: () => controller.setDecimal(6),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(6.0),
-                        child: ElevatedButton(
-                          onPressed: () => controller.calculate(),
-                          child: Text(
-                            '=',
-                            style: TextStyle(fontSize: buttonFontSize),
-                          ),
-                        ),
+                      CalculatorButton(
+                        label: "=",
+                        fontSize: buttonFontSize,
+                        onPressed: () => controller.calculate(),
                       ),
                     ],
                   ),
