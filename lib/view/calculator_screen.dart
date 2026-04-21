@@ -44,162 +44,193 @@ class CalculatorScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: Column(
-        children: [
-          Expanded(  flex: 3,
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          bool isLandscape = constraints.maxWidth > constraints.maxHeight;
+          int displayFlex = isLandscape ? 2 : 3;
+          int gridFlex = isLandscape ? 6 : 5;
 
-            child: Align(
-              alignment: Alignment.bottomRight,
-              child: Padding(
-                padding: EdgeInsets.all(20),
-                child: Obx(() => Text(
-                  controller.input.value,
-                  style: TextStyle(
-                    fontSize: 48,
-                    fontWeight: FontWeight.bold,
-                  ),
-                )),
-              ),
-            ),
-          ),
-          Expanded(
-            flex: 5,
-            child: Padding(
-              padding: EdgeInsets.only(bottom: 12),
+          double displayFontSize = constraints.maxHeight * (isLandscape ? 0.08 : 0.08);
+          double buttonFontSize = constraints.maxWidth * (isLandscape ? 0.03 : 0.045);
 
-              child: GridView.count(
-                crossAxisCount: 4,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(6.0),
-                    child: ElevatedButton(
-                      onPressed: () => controller.appendValues("7"),
-                      child: Text('7'),
-                    ),
+          double gridHeight = (constraints.maxHeight * gridFlex / (displayFlex + gridFlex)) - 12;
+          double cellWidth = constraints.maxWidth / 4;
+          double cellHeight = gridHeight / 5;
+          double aspectRatio = cellWidth / cellHeight;
+
+          return Column(
+            children: [
+              Expanded(flex: displayFlex,
+                child: Align(
+                  alignment: Alignment.bottomRight,
+                  child: Padding(
+                    padding: EdgeInsets.all(isLandscape ? 8 : 20),
+                    child: Obx(() => Text(
+                      controller.input.value,
+                      style: TextStyle(
+                        fontSize: displayFontSize,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    )),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(6.0),
-                    child: ElevatedButton(
-                      onPressed: () => controller.appendValues("8"),
-                      child: Text('8'),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(6.0),
-                    child: ElevatedButton(
-                      onPressed: () => controller.appendValues("9"),
-                      child: Text('9'),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(6.0),
-                    child: ElevatedButton(onPressed: () => controller.setOperator("/"), child: Text('÷')),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(6.0),
-                    child: ElevatedButton(
-                      onPressed: () => controller.appendValues("4"),
-                      child: Text('4'),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(6.0),
-                    child: ElevatedButton(
-                      onPressed: () => controller.appendValues("5"),
-                      child: Text('5'),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(6.0),
-                    child: ElevatedButton(
-                      onPressed: () => controller.appendValues("6"),
-                      child: Text('6'),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(6.0),
-                    child: ElevatedButton(onPressed: () => controller.setOperator("*"), child: Text('×')),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(6.0),
-                    child: ElevatedButton(
-                      onPressed: () => controller.appendValues("1"),
-                      child: Text('1'),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(6.0),
-                    child: ElevatedButton(
-                      onPressed: () => controller.appendValues("2"),
-                      child: Text('2'),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(6.0),
-                    child: ElevatedButton(
-                      onPressed: () => controller.appendValues("3"),
-                      child: Text('3'),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(6.0),
-                    child: ElevatedButton(onPressed: () => controller.setOperator("-"), child: Text('-')),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(6.0),
-                    child: ElevatedButton(
-                      onPressed: () => controller.appendValues("0"),
-                      child: Text('0'),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(6.0),
-                    child: ElevatedButton(
-                      onPressed: () => controller.appendValues("."),
-                      child: Text('.'),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(6.0),
-                    child: ElevatedButton(
-                      onPressed: () => controller.clear(),
-                      child: Text('C'),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(6.0),
-                    child: ElevatedButton(onPressed: () => controller.setOperator("+"), child: Text('+')),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(6.0),
-                    child: ElevatedButton(
-                      onPressed: () => controller.setDecimal(2),
-                      child: Text("2dp"),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(6.0),
-                    child: ElevatedButton(
-                      onPressed: () => controller.setDecimal(4),
-                      child: Text("4dp"),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(6.0),
-                    child: ElevatedButton(
-                      onPressed: () => controller.setDecimal(6),
-                      child: Text("6dp"),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(6.0),
-                    child: ElevatedButton(onPressed: () => controller.calculate(), child: Text('=')),
-                  ),
-                ],
+                ),
               ),
-            ),
-          ),
-        ],
+              Expanded(
+                flex: gridFlex,
+                child: Padding(
+                  padding: EdgeInsets.only(bottom: isLandscape ? 4 : 12),
+                  child: GridView.count(
+                    crossAxisCount: 4,
+                    physics: NeverScrollableScrollPhysics(),
+                    childAspectRatio: aspectRatio,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(6.0),
+                        child: ElevatedButton(
+                          onPressed: () => controller.appendValues("7"),
+                          child: Text('7', style: TextStyle(fontSize: buttonFontSize)),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(6.0),
+                        child: ElevatedButton(
+                          onPressed: () => controller.appendValues("8"),
+                          child: Text('8', style: TextStyle(fontSize: buttonFontSize)),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(6.0),
+                        child: ElevatedButton(
+                          onPressed: () => controller.appendValues("9"),
+                          child: Text('9', style: TextStyle(fontSize: buttonFontSize)),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(6.0),
+                        child: ElevatedButton(
+                          onPressed: () => controller.setOperator("/"),
+                          child: Text('÷', style: TextStyle(fontSize: buttonFontSize)),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(6.0),
+                        child: ElevatedButton(
+                          onPressed: () => controller.appendValues("4"),
+                          child: Text('4', style: TextStyle(fontSize: buttonFontSize)),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(6.0),
+                        child: ElevatedButton(
+                          onPressed: () => controller.appendValues("5"),
+                          child: Text('5', style: TextStyle(fontSize: buttonFontSize)),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(6.0),
+                        child: ElevatedButton(
+                          onPressed: () => controller.appendValues("6"),
+                          child: Text('6', style: TextStyle(fontSize: buttonFontSize)),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(6.0),
+                        child: ElevatedButton(
+                          onPressed: () => controller.setOperator("*"),
+                          child: Text('×', style: TextStyle(fontSize: buttonFontSize)),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(6.0),
+                        child: ElevatedButton(
+                          onPressed: () => controller.appendValues("1"),
+                          child: Text('1', style: TextStyle(fontSize: buttonFontSize)),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(6.0),
+                        child: ElevatedButton(
+                          onPressed: () => controller.appendValues("2"),
+                          child: Text('2', style: TextStyle(fontSize: buttonFontSize)),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(6.0),
+                        child: ElevatedButton(
+                          onPressed: () => controller.appendValues("3"),
+                          child: Text('3', style: TextStyle(fontSize: buttonFontSize)),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(6.0),
+                        child: ElevatedButton(
+                          onPressed: () => controller.setOperator("-"),
+                          child: Text('-', style: TextStyle(fontSize: buttonFontSize)),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(6.0),
+                        child: ElevatedButton(
+                          onPressed: () => controller.appendValues("0"),
+                          child: Text('0', style: TextStyle(fontSize: buttonFontSize)),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(6.0),
+                        child: ElevatedButton(
+                          onPressed: () => controller.appendValues("."),
+                          child: Text('.', style: TextStyle(fontSize: buttonFontSize)),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(6.0),
+                        child: ElevatedButton(
+                          onPressed: () => controller.clear(),
+                          child: Text('C', style: TextStyle(fontSize: buttonFontSize)),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(6.0),
+                        child: ElevatedButton(
+                          onPressed: () => controller.setOperator("+"),
+                          child: Text('+', style: TextStyle(fontSize: buttonFontSize)),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(6.0),
+                        child: ElevatedButton(
+                          onPressed: () => controller.setDecimal(2),
+                          child: Text("2dp", style: TextStyle(fontSize: buttonFontSize)),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(6.0),
+                        child: ElevatedButton(
+                          onPressed: () => controller.setDecimal(4),
+                          child: Text("4dp", style: TextStyle(fontSize: buttonFontSize)),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(6.0),
+                        child: ElevatedButton(
+                          onPressed: () => controller.setDecimal(6),
+                          child: Text("6dp", style: TextStyle(fontSize: buttonFontSize)),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(6.0),
+                        child: ElevatedButton(
+                          onPressed: () => controller.calculate(),
+                          child: Text('=', style: TextStyle(fontSize: buttonFontSize)),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          );
+        },
       ),
     );
   }
